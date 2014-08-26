@@ -40,6 +40,8 @@ import com.android.internal.telephony.SmsHeader;
 import com.android.internal.telephony.SmsUsageMonitor;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.internal.telephony.cdma.sms.UserData;
+import com.android.internal.telephony.PhoneConstants;
+import android.telephony.TelephonyManager;
 
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -253,13 +255,13 @@ public class CdmaSMSDispatcher extends SMSDispatcher {
                     && !mPhone.getServiceStateTracker().isConcurrentVoiceAndDataAllowed()))
                     && mPhone.getServiceState().getVoiceNetworkType()
                     == TelephonyManager.NETWORK_TYPE_1xRTT
-                    && ((CDMAPhone) mPhone).mCT.mState != PhoneConstants.State.IDLE;
+                    && mPhone.getState() != PhoneConstants.State.IDLE;
 
         // sms over cdma is used:
         //   if sms over IMS is not supported AND
         //   this is not a retry case after sms over IMS failed
         //     indicated by mImsRetry > 0
-        if (0 == tracker.mImsRetry && !isIms()) {
+        if (0 == tracker.mImsRetry && !isIms() || imsSmsDisabled) {
             mCi.sendCdmaSms(pdu, reply);
         }
         // If sending SMS over IMS is not enabled, send SMS over cdma. Simply
