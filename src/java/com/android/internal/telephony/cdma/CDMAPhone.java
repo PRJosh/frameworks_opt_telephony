@@ -1975,4 +1975,15 @@ public class CDMAPhone extends PhoneBase {
         return status;
     }
 
+    public boolean isUtEnabled() {
+        ImsPhone imsPhone = mImsPhone;
+        if (imsPhone != null) {
+            return imsPhone.isUtEnabled();
+        } else {
+            Rlog.d(LOG_TAG, "isUtEnabled: called for CDMA");
+            return false;
+        }
+    }
+
+
 }
