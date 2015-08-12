@@ -233,7 +233,10 @@ public class GsmServiceStateTracker extends ServiceStateTracker {
         int airplaneMode = Settings.Global.getInt(
                 phone.getContext().getContentResolver(),
                 Settings.Global.AIRPLANE_MODE_ON, 0);
-        mDesiredPowerState = ! (airplaneMode > 0);
+        int enableCellularOnBoot = Settings.Global.getInt(
+                phone.getContext().getContentResolver(),
+                Settings.Global.ENABLE_CELLULAR_ON_BOOT, 1);
+        mDesiredPowerState = (enableCellularOnBoot > 0) && ! (airplaneMode > 0);
 
         mCr = phone.getContext().getContentResolver();
         mCr.registerContentObserver(
