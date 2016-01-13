@@ -1536,7 +1536,7 @@ public interface Phone {
      */
     void setTTYMode(int ttyMode, Message onComplete);
 
-   /**
+    /**
      * setUiTTYMode
      * sets a TTY mode option.
      * @param ttyMode is a one of the following:
@@ -2136,4 +2136,10 @@ public interface Phone {
      * @param lchStatus, true if call is in lch state
      */
     public void setLocalCallHold(boolean lchStatus);
+
+    /**
+     * Set boolean broadcastEmergencyCallStateChanges
+     */
+    public void setBroadcastEmergencyCallStateChanges(boolean broadcast);
+
 }
