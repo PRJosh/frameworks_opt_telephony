@@ -1182,6 +1182,7 @@ public class ImsPhone extends ImsPhoneBase {
                     if (infos[i].mServiceClass == (SERVICE_CLASS_DATA_SYNC +
                                 SERVICE_CLASS_PACKET)) {
                         setVideoCallForwardingPreference(infos[i].mStatus == 1);
+                        notifyCallForwardingIndicator();
                     } else if (r != null) {
                         setVoiceCallForwardingFlag(r, 1, (infos[i].mStatus == 1),
                             infos[i].mNumber);
@@ -1661,6 +1662,11 @@ public class ImsPhone extends ImsPhoneBase {
     @Override
     public void setBroadcastEmergencyCallStateChanges(boolean broadcast) {
         mDefaultPhone.setBroadcastEmergencyCallStateChanges(broadcast);
+    }
+
+    @Override
+    public void notifyCallForwardingIndicator() {
+        mDefaultPhone.notifyCallForwardingIndicator();
     }
 
     @VisibleForTesting
