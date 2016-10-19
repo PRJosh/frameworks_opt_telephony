@@ -1643,7 +1643,7 @@ public class GsmCdmaPhone extends Phone {
     @Override
     public void getCallForwardingOption(int commandInterfaceCFReason, Message onComplete) {
         getCallForwardingOption(commandInterfaceCFReason,
-            CommandsInterface.SERVICE_CLASS_VOICE, onComplete);
+            CommandsInterface.SERVICE_CLASS_NONE, onComplete);
     }
 
     @Override
@@ -1668,12 +1668,8 @@ public class GsmCdmaPhone extends Phone {
                     resp = onComplete;
                 }
 
-                if (commandInterfaceServiceClass == CommandsInterface.SERVICE_CLASS_VOICE) {
-                    mCi.queryCallForwardStatus(commandInterfaceCFReason, 0, null, resp);
-                } else {
-                    mCi.queryCallForwardStatus(commandInterfaceCFReason,
+                mCi.queryCallForwardStatus(commandInterfaceCFReason,
                         commandInterfaceServiceClass, null, resp);
-                }
             }
         } else {
             loge("getCallForwardingOption: not possible in CDMA");
