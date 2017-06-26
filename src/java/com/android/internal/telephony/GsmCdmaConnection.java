@@ -163,12 +163,15 @@ public class GsmCdmaConnection extends Connection {
                 showOrigDialString = pb.getBoolean("config_show_orig_dial_string_for_cdma");
             }
         }
-        if (isPhoneTypeGsm() || showOrigDialString) {
+        if (isPhoneTypeGsm()) {
             mDialString = dialString;
         }
         if (!isPhoneTypeGsm()) {
             Rlog.d(LOG_TAG, "[GsmCdmaConn] GsmCdmaConnection: dialString=" +
                     maskDialString(dialString));
+            if (showOrigDialString) {
+                mDialString = dialString;
+            }
             dialString = formatDialString(dialString);
             Rlog.d(LOG_TAG,
                     "[GsmCdmaConn] GsmCdmaConnection:formated dialString=" +

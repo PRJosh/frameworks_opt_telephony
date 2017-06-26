@@ -483,6 +483,10 @@ public class IccProvider extends ContentProvider {
 
     private boolean
     updateIccRecordInEf(int efType, ContentValues values, String pin2, int subId) {
+        if (DBG) log("updateIccRecordInEf: efType=0x" + Integer.toHexString(efType).toUpperCase() +
+                ", values=" + Rlog.pii(TAG, values) +
+                ", subscription=" + subId);
+
         boolean success = false;
 
         if (DBG) log("updateIccRecordInEf: efType=" + efType +
@@ -541,6 +545,7 @@ public class IccProvider extends ContentProvider {
             String alphaTag = record.getAlphaTag();
             String number = record.getNumber();
             String[] anrs = record.getAdditionalNumbers();
+
             if (DBG) log("loadRecord: " + alphaTag + ", " + Rlog.pii(TAG, number));
             contact[0] = alphaTag;
             contact[1] = number;

@@ -2817,7 +2817,7 @@ public class GsmCdmaPhone extends Phone {
         }
         // if phone is not in Ecm mode, and it's changed to Ecm mode
         if (mIsPhoneInEcmState == false) {
-            setSystemProperty(TelephonyProperties.PROPERTY_INECM_MODE, "true");
+            super.setSystemProperty(TelephonyProperties.PROPERTY_INECM_MODE, "true");
             mIsPhoneInEcmState = true;
             // notify change
             sendEmergencyCallbackModeChange();
@@ -2848,7 +2848,7 @@ public class GsmCdmaPhone extends Phone {
         // if exiting ecm success
         if (ar.exception == null) {
             if (mIsPhoneInEcmState) {
-                setSystemProperty(TelephonyProperties.PROPERTY_INECM_MODE, "false");
+                super.setSystemProperty(TelephonyProperties.PROPERTY_INECM_MODE, "false");
                 mIsPhoneInEcmState = false;
             }
 
